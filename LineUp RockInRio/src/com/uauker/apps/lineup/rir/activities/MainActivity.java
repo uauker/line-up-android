@@ -1,8 +1,10 @@
-package com.uauker.apps.lineup.rir;
+package com.uauker.apps.lineup.rir.activities;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
+
+import com.uauker.apps.lineup.rir.R;
 
 public class MainActivity extends Activity {
 
