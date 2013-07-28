@@ -1,6 +1,7 @@
 package com.uauker.apps.lineup.rir.fragments;
 
 import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
 import com.actionbarsherlock.app.SherlockFragment;
 import com.uauker.apps.lineup.rir.R;
+import com.uauker.apps.lineup.rir.adapters.EventAdapter;
 import com.uauker.apps.lineup.rir.models.Event;
 import com.uauker.apps.lineup.rir.models.Palco;
 import com.uauker.apps.lineup.rir.services.RockInRioEvents;
@@ -18,7 +21,7 @@ import com.uauker.apps.lineup.rir.services.RockInRioEvents;
 public class LineupFragment extends SherlockFragment {
 
 	
-	public ListView eventListView;
+	public ListView listViewEvent;
 	
 	public List<Palco> palcos;
 	
@@ -44,6 +47,7 @@ public class LineupFragment extends SherlockFragment {
 		
 		if (this.event == null) {
 			this.event = rirService.getFirstEvent();
+			this.palcos = this.event.palcos;
 		}
 
 		// final ActionBar ab = ((SherlockFragmentActivity)
@@ -55,10 +59,17 @@ public class LineupFragment extends SherlockFragment {
 		View contentView = inflater.inflate(R.layout.fragment_event,
 				container, false);
 
-		this.eventListView = (ListView) contentView
+		this.listViewEvent = (ListView) contentView
 				.findViewById(R.id.event_list_view);
+		
+		loadMusiciansFromPalco(palcos.get(0));
 
 		return contentView;
+	}
+
+	private void loadMusiciansFromPalco(Palco palco) {
+		EventAdapter eventAdapter = new EventAdapter(ownerActivity, R.layout.adapter_event, palco.musicias);
+		this.listViewEvent.setAdapter(eventAdapter);
 	}
 
 	@Override
