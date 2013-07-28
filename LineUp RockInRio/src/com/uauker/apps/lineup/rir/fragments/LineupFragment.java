@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.uauker.apps.lineup.rir.R;
 import com.uauker.apps.lineup.rir.adapters.EventAdapter;
 import com.uauker.apps.lineup.rir.models.Event;
@@ -47,12 +49,13 @@ public class LineupFragment extends SherlockFragment {
 		
 		if (this.event == null) {
 			this.event = rirService.getFirstEvent();
-			this.palcos = this.event.palcos;
 		}
 
-		// final ActionBar ab = ((SherlockFragmentActivity)
-		// ownerActivity).getSupportActionBar();
-		// ab.setBackgroundDrawable(this.editoriaColor);
+		this.palcos = this.event.palcos;
+		
+		final ActionBar ab = ((SherlockFragmentActivity) ownerActivity)
+				.getSupportActionBar();
+		ab.setTitle(this.event.date);
 
 		setHasOptionsMenu(true);
 
