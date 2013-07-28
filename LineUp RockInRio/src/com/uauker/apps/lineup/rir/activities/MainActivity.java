@@ -72,11 +72,6 @@ public class MainActivity extends BaseActivity {
 	public void switchContent(Fragment fragment) {
 		mContent = fragment;
 
-		if (mContent != null) {
-			this.sm.setOnOpenListener((OnOpenListener) mContent);
-			this.sm.setOnCloseListener((OnCloseListener) mContent);
-		}
-
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.content_frame, fragment).commit();
 		getSlidingMenu().showContent();
