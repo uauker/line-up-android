@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.uauker.apps.lineup.rir.R;
 import com.uauker.apps.lineup.rir.activities.MainActivity;
 import com.uauker.apps.lineup.rir.fragments.LineupFragment;
+import com.uauker.apps.lineup.rir.helpers.ColorHelper;
 import com.uauker.apps.lineup.rir.helpers.SharedPreferencesHelper;
 
 public class MenuListFragment extends ListFragment {
@@ -65,8 +66,9 @@ public class MenuListFragment extends ListFragment {
 
 		for (int i = 0; i < eventDays.length; i++) {
 			String eventName = eventWeekDays[i] + eventDays[i];
-
-			events.add(new EventItemMenu(eventName));
+			int eventColor = ColorHelper.findByValue(ownerActivity, eventDays[i]);
+			
+			events.add(new EventItemMenu(eventName, eventColor));
 		}
 
 		return events;
@@ -85,8 +87,9 @@ public class MenuListFragment extends ListFragment {
 		public String name;
 		public int color;
 
-		public EventItemMenu(String name) {
+		public EventItemMenu(String name, int eventColor) {
 			this.name = name;
+			this.color = eventColor;
 		}
 	}
 
@@ -111,13 +114,6 @@ public class MenuListFragment extends ListFragment {
 			final TextView title = (TextView) convertView
 					.findViewById(R.id.row_title);
 			title.setText(item.name);
-
-			// StateListDrawable states = new StateListDrawable();
-			// states.addState(new int[] { android.R.attr.state_pressed },
-			// MenuListFragment.this.ownerActivity.getResources()
-			// .getDrawable(R.drawable.ic_stub_thumb));
-
-			// convertView.setBackgroundDrawable(states);
 
 			if (item.name.equalsIgnoreCase(editoriaName)) {
 				convertView.setBackgroundColor(item.color);
