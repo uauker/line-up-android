@@ -26,7 +26,6 @@ public class MainActivity extends BaseActivity {
 		// set defaults for logo & home up
 		ab.setDisplayHomeAsUpEnabled(true);
 		ab.setDisplayUseLogoEnabled(true);
-		ab.setIcon(R.drawable.ic_menu);
 
 		if (savedInstanceState != null) {
 			mContent = getSupportFragmentManager().getFragment(
