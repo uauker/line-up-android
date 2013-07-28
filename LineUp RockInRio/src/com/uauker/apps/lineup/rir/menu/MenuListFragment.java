@@ -26,8 +26,8 @@ public class MenuListFragment extends ListFragment {
 
 	String[] eventDays = { "13/09", "14/09", "15/09", "19/09", "20/09",
 			"21/09", "22/09" };
-	String[] eventWeekDays = { "SEXTA", "SÁBADO", "DOMINGO", "QUINTA", "SEXTA",
-			"SÁBADO", "DOMINGO" };
+	String[] eventWeekDays = { "SEXTA ", "SÁBADO ", "DOMINGO ", "QUINTA ", "SEXTA ",
+			"SÁBADO ", "DOMINGO " };
 
 	private Activity ownerActivity;
 
