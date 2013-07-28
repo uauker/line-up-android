@@ -8,12 +8,12 @@
     <color name="background_image_caption">#1A1A1A</color>
     
     <!-- CORES PADROES DAS EDITORIAS -->
-    <color name="13/09">#000000</color>
-    <color name="14/09">#e40000</color>
-    <color name="15/09">#ff7200</color>
-    <color name="19/09">#ecb010</color>
-    <color name="20/09">#c722fd</color>
-    <color name="21/09">#ed1d51</color>
-    <color name="22/09">#0cb7e2</color>
+    <color name="day_13_09">#000000</color>
+    <color name="day_14_09">#e40000</color>
+    <color name="day_15_09">#ff7200</color>
+    <color name="day_19_09">#ecb010</color>
+    <color name="day_20_09">#c722fd</color>
+    <color name="day_21_09">#ed1d51</color>
+    <color name="day_22_09">#0cb7e2</color>
     
 </resources>
