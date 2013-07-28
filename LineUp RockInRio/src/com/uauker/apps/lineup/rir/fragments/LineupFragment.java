@@ -81,6 +81,7 @@ public class LineupFragment extends SherlockFragment implements
 
 		final ActionBar ab = ((SherlockFragmentActivity) ownerActivity)
 				.getSupportActionBar();
+
 		ab.setTitle(this.event.name());
 		ab.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		ab.setListNavigationCallbacks(list, this);
