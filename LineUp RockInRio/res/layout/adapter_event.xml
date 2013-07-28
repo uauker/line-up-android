@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.uauker.apps.lineup.rir"
     android:layout_width="match_parent"
     android:layout_height="85dp" >
 
-    <TextView
+    <com.uauker.apps.lineup.rir.utils.RobotoTextView
         android:id="@+id/adapter_event_musician_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,6 +14,6 @@
         android:padding="20dp"
         android:text="@string/example_musician_name"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        app:typeface="roboto_condensed_bold" />
 
 </RelativeLayout>

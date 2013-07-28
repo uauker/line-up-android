@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.uauker.apps.lineup.rir.utils.RobotoTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.uauker.apps.lineup.rir"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:textSize="12sp"
+    android:gravity="left|center"
     android:padding="8dp"
     android:textColor="@color/white"
-    android:gravity="left|center" />
+    android:textSize="12sp"
+    app:typeface="roboto_condensed" />
