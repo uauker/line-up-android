@@ -4,16 +4,17 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     
+    <color name="background_menu">#272727</color>
     <color name="background_default">#f0f0f0</color>
     <color name="background_image_caption">#1A1A1A</color>
     
     <!-- CORES PADROES DAS EDITORIAS -->
-    <color name="day_13_09">#000000</color>
-    <color name="day_14_09">#e40000</color>
-    <color name="day_15_09">#ff7200</color>
-    <color name="day_19_09">#ecb010</color>
-    <color name="day_20_09">#c722fd</color>
-    <color name="day_21_09">#ed1d51</color>
-    <color name="day_22_09">#0cb7e2</color>
+    <color name="day_13_09">#ff69b4</color>
+    <color name="day_14_09">#ecb010</color>
+    <color name="day_15_09">#0cb7e2</color>
+    <color name="day_19_09">#e40000</color>
+    <color name="day_20_09">#ff7200</color>
+    <color name="day_21_09">#8a2be2</color>
+    <color name="day_22_09">#32cd32</color>
     
 </resources>

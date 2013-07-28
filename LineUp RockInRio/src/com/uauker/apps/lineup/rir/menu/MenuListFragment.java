@@ -120,7 +120,7 @@ public class MenuListFragment extends ListFragment {
 				title.setTextColor(getResources().getColor(R.color.white));
 			} else {
 				convertView.setBackgroundColor(ownerActivity.getResources()
-						.getColor(R.color.white));
+						.getColor(R.color.background_menu));
 				title.setTextColor(item.color);
 			}
 
