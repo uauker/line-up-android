@@ -39,11 +39,6 @@ public class MainActivity extends BaseActivity {
 			mContent = new LineupFragment();
 		}
 
-		if (mContent != null) {
-			this.sm.setOnOpenListener((OnOpenListener) mContent);
-			this.sm.setOnCloseListener((OnCloseListener) mContent);
-		}
-
 		// set the Above View
 		setContentView(R.layout.content_frame);
 		getSupportFragmentManager().beginTransaction()
