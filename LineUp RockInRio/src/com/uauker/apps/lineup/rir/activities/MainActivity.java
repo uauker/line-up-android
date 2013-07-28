@@ -82,6 +82,6 @@ public class MainActivity extends BaseActivity {
 		sharedPreferences = SharedPreferencesHelper
 				.getInstance(getApplicationContext());
 
-		sharedPreferences.setString(MenuListFragment.SELECTED_MENU_ROW, "");
+		sharedPreferences.setString(MenuListFragment.SELECTED_MENU_ROW, "SEXTA 13/09");
 	}
 }
