@@ -7,5 +7,6 @@
     <string name="internet_failure_try_again">Tentar novamente</string>
     <string name="internet_failure">Erro de conexão</string>
     <string name="loading" tools:ignore="TypographyEllipsis">Carregando...</string>
+    <string name="example_event_name">SEXTA 13/09</string>
 
 </resources>
