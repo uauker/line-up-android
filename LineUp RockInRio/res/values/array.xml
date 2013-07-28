@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="palco_filter">
+	    <item>@string/filter_palco_mundo</item>
+	    <item>@string/filter_palco_sunset</item>
+	    <item>@string/filter_palco_eletronica</item>
+	    <item>@string/filter_palco_rock_street</item>
+	</string-array>
+</resources>

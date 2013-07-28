@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -19,8 +20,8 @@ import com.uauker.apps.lineup.rir.models.Event;
 import com.uauker.apps.lineup.rir.models.Palco;
 import com.uauker.apps.lineup.rir.services.RockInRioEvents;
 
-@SuppressLint("ValidFragment")
-public class LineupFragment extends SherlockFragment {
+@SuppressLint({ "ValidFragment", "DefaultLocale" })
+public class LineupFragment extends SherlockFragment implements ActionBar.OnNavigationListener {
 
 	
 	public ListView listViewEvent;
@@ -30,6 +31,8 @@ public class LineupFragment extends SherlockFragment {
 	public Event event;
 
 	public Activity ownerActivity;
+	
+	private String[] palcoNames;
 
 	public LineupFragment() {
 		super();
@@ -53,10 +56,8 @@ public class LineupFragment extends SherlockFragment {
 
 		this.palcos = this.event.palcos;
 		
-		final ActionBar ab = ((SherlockFragmentActivity) ownerActivity)
-				.getSupportActionBar();
-		ab.setTitle(this.event.date);
-
+		this.palcoNames = getResources().getStringArray(R.array.palco_filter);
+		
 		setHasOptionsMenu(true);
 
 		View contentView = inflater.inflate(R.layout.fragment_event,
@@ -66,10 +67,24 @@ public class LineupFragment extends SherlockFragment {
 				.findViewById(R.id.event_list_view);
 		
 		loadMusiciansFromPalco(palcos.get(0));
+		
+		ArrayAdapter<CharSequence> list = ArrayAdapter.createFromResource(ownerActivity, R.array.palco_filter, R.layout.actionbar_dropdown_filter);
+        list.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
 
-		return contentView;
-	}
+        final ActionBar ab = ((SherlockFragmentActivity) ownerActivity)
+				.getSupportActionBar();
+		ab.setTitle(this.event.date);
+        ab.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+        ab.setListNavigationCallbacks(list, this);
+        
+        return contentView;
+    }
 
+    @Override
+    public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+        sortMusicians(palcoNames[itemPosition]);
+        return true;
+    }
 	private void loadMusiciansFromPalco(Palco palco) {
 		EventAdapter eventAdapter = new EventAdapter(ownerActivity, R.layout.adapter_event, palco.musicias);
 		this.listViewEvent.setAdapter(eventAdapter);
@@ -80,5 +95,15 @@ public class LineupFragment extends SherlockFragment {
 		super.onAttach(activity);
 
 		this.ownerActivity = activity;
+	}
+	
+	protected void sortMusicians(String selection) {
+		String palcoSelected = selection.toLowerCase();
+		for (Palco palco : this.palcos) {
+			if (palcoSelected.contains(palco.name)) {
+				loadMusiciansFromPalco(palco);
+			}
+		}
+		
 	}
 }
