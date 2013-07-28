@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.uauker.apps.lineup.rir.R;
-import com.uauker.apps.lineup.rir.models.Event;
+import android.content.Context;
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-
-import android.content.Context;
-import android.util.Log;
+import com.uauker.apps.lineup.rir.R;
+import com.uauker.apps.lineup.rir.models.Event;
 
 public class RockInRioEvents {
 
@@ -27,6 +27,11 @@ public class RockInRioEvents {
 		this.context = context;
 	}
 
+	public List<Event> getAllEvents() {
+		loadEvents();
+		return events;
+	}
+	
 	public void loadEvents() {
 		try {
 			InputStream rawResource = context.getResources().openRawResource(
@@ -58,5 +63,12 @@ public class RockInRioEvents {
 		}
 		return new String(baos.toByteArray());
 	}
-
+	
+	public Event getFirstEvent() {
+		if (events.size() < 1) {
+			loadEvents();
+		}
+		
+		return events.get(0);
+	}
 }

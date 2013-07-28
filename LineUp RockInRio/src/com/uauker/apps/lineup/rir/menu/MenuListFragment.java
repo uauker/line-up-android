@@ -19,6 +19,8 @@ import com.uauker.apps.lineup.rir.activities.MainActivity;
 import com.uauker.apps.lineup.rir.fragments.LineupFragment;
 import com.uauker.apps.lineup.rir.helpers.ColorHelper;
 import com.uauker.apps.lineup.rir.helpers.SharedPreferencesHelper;
+import com.uauker.apps.lineup.rir.models.Event;
+import com.uauker.apps.lineup.rir.services.RockInRioEvents;
 
 public class MenuListFragment extends ListFragment {
 
@@ -31,15 +33,22 @@ public class MenuListFragment extends ListFragment {
 
 	public final static String SELECTED_MENU_ROW = "selectedMenuRow";
 
+	List<Event> events;
+	
 	MenuAdapter adapter;
 
 	SharedPreferencesHelper sharedPreferences;
 
-	List<EventItemMenu> events = new ArrayList<EventItemMenu>();
+	List<EventItemMenu> eventsByMenu = new ArrayList<EventItemMenu>();
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
 		sharedPreferences = SharedPreferencesHelper.getInstance(ownerActivity);
+		
+		RockInRioEvents rirService = new RockInRioEvents(ownerActivity);
+		this.events = rirService.getAllEvents();
+		
 		return inflater.inflate(R.layout.menu_list, null);
 
 	}
@@ -68,10 +77,10 @@ public class MenuListFragment extends ListFragment {
 			String eventName = eventWeekDays[i] + eventDays[i];
 			int eventColor = ColorHelper.findByValue(ownerActivity, eventDays[i]);
 			
-			events.add(new EventItemMenu(eventName, eventColor));
+			eventsByMenu.add(new EventItemMenu(eventName, eventColor));
 		}
 
-		return events;
+		return eventsByMenu;
 	}
 
 	private void switchFragment(Fragment fragment) {
@@ -132,7 +141,7 @@ public class MenuListFragment extends ListFragment {
 
 					sharedPreferences.setString(SELECTED_MENU_ROW, item.name);
 
-					newContent = new LineupFragment();
+					newContent = new LineupFragment(events.get(position));
 
 					if (newContent != null) {
 						switchFragment(newContent);

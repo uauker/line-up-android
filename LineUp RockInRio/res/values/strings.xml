@@ -8,5 +8,6 @@
     <string name="internet_failure">Erro de conexão</string>
     <string name="loading" tools:ignore="TypographyEllipsis">Carregando...</string>
     <string name="example_event_name">SEXTA 13/09</string>
+    <string name="example_musician_name">Beyoncé</string>
 
 </resources>

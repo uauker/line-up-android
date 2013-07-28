@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.view.MenuItem;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.OnCloseListener;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.OnOpenListener;
 import com.uauker.apps.lineup.rir.R;
 import com.uauker.apps.lineup.rir.fragments.LineupFragment;
 import com.uauker.apps.lineup.rir.helpers.SharedPreferencesHelper;
