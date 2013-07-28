@@ -121,7 +121,7 @@ public class MenuListFragment extends ListFragment {
 			} else {
 				convertView.setBackgroundColor(ownerActivity.getResources()
 						.getColor(R.color.white));
-				title.setTextColor(getResources().getColor(R.color.black));
+				title.setTextColor(item.color);
 			}
 
 			convertView.setOnClickListener(new View.OnClickListener() {
