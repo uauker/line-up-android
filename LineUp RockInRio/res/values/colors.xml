@@ -3,6 +3,7 @@
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="red_text">#CA4D41</color>
     
     <color name="background_menu">#272727</color>
     <color name="background_default">#f0f0f0</color>

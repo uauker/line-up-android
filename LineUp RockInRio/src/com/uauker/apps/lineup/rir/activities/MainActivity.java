@@ -1,5 +1,6 @@
 package com.uauker.apps.lineup.rir.activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
@@ -11,6 +12,7 @@ import com.uauker.apps.lineup.rir.fragments.LineupFragment;
 import com.uauker.apps.lineup.rir.helpers.SharedPreferencesHelper;
 import com.uauker.apps.lineup.rir.menu.MenuListFragment;
 
+@SuppressLint("SimpleDateFormat")
 public class MainActivity extends BaseActivity {
 
 	private Fragment mContent;
@@ -81,6 +83,7 @@ public class MainActivity extends BaseActivity {
 		sharedPreferences = SharedPreferencesHelper
 				.getInstance(getApplicationContext());
 
-		sharedPreferences.setString(MenuListFragment.SELECTED_MENU_ROW, "SEXTA 13/09");
+		sharedPreferences.setString(MenuListFragment.SELECTED_MENU_ROW,
+				"SEXTA 13/09");
 	}
 }

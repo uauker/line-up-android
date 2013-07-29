@@ -1,14 +1,19 @@
 package com.uauker.apps.lineup.rir.fragments;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -21,7 +26,7 @@ import com.uauker.apps.lineup.rir.models.Event;
 import com.uauker.apps.lineup.rir.models.Palco;
 import com.uauker.apps.lineup.rir.services.RockInRioEvents;
 
-@SuppressLint({ "ValidFragment", "DefaultLocale" })
+@SuppressLint({ "ValidFragment", "DefaultLocale", "SimpleDateFormat" })
 public class LineupFragment extends SherlockFragment implements
 		ActionBar.OnNavigationListener {
 
@@ -37,6 +42,22 @@ public class LineupFragment extends SherlockFragment implements
 
 	private String[] palcoNames;
 
+	private long rirStartTime;
+	private long timeToStartRir;
+
+	private LinearLayout viewCountDownTimer;
+
+	private TextView textDayCountDownTimer;
+	private TextView textDayTimeCountDownTimer;
+
+	private TextView textHourCountDownTimer;
+	private TextView textHourTimeCountDownTimer;
+
+	private TextView textMinuteCountDownTimer;
+	private TextView textMinuteTimeCountDownTimer;
+
+	private TextView textSecondTimeCountDownTimer;
+
 	public LineupFragment() {
 		super();
 	}
@@ -50,6 +71,24 @@ public class LineupFragment extends SherlockFragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+
+		String stringStartTime = "2013-09-13T00:00:00Z";
+		Date date = null;
+
+		try {
+			date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+					.parse(stringStartTime);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		this.rirStartTime = date.getTime();
+
+		Date currentDate = new Date();
+
+		long currentTime = currentDate.getTime();
+
+		this.timeToStartRir = rirStartTime - currentTime;
 
 		RockInRioEvents rirService = new RockInRioEvents(ownerActivity);
 
@@ -65,6 +104,9 @@ public class LineupFragment extends SherlockFragment implements
 
 		View contentView = inflater.inflate(R.layout.fragment_event, container,
 				false);
+
+		setViewCountDownTimer(contentView);
+		startTimer();
 
 		this.listViewEvent = (ListView) contentView
 				.findViewById(R.id.event_list_view);
@@ -108,6 +150,30 @@ public class LineupFragment extends SherlockFragment implements
 		this.ownerActivity = activity;
 	}
 
+	private void setViewCountDownTimer(View contentView) {
+
+		this.viewCountDownTimer = (LinearLayout) contentView
+				.findViewById(R.id.count_down_timer);
+
+		this.textDayCountDownTimer = (TextView) contentView
+				.findViewById(R.id.count_down_timer_day_d);
+		this.textDayTimeCountDownTimer = (TextView) contentView
+				.findViewById(R.id.count_down_timer_day_time);
+
+		this.textHourCountDownTimer = (TextView) contentView
+				.findViewById(R.id.count_down_timer_hour_h);
+		this.textHourTimeCountDownTimer = (TextView) contentView
+				.findViewById(R.id.count_down_timer_hour_time);
+
+		this.textMinuteCountDownTimer = (TextView) contentView
+				.findViewById(R.id.count_down_timer_min_m);
+		this.textMinuteTimeCountDownTimer = (TextView) contentView
+				.findViewById(R.id.count_down_timer_min_time);
+
+		this.textSecondTimeCountDownTimer = (TextView) contentView
+				.findViewById(R.id.count_down_timer_second_time);
+	}
+
 	protected void sortMusicians(String selection) {
 		String palcoSelected = selection.toLowerCase();
 		if (palcoSelected.equals("rock street")) {
@@ -122,6 +188,87 @@ public class LineupFragment extends SherlockFragment implements
 				}
 			}
 		}
+	}
+
+	private void startTimer() {
+
+		new CountDownTimer(timeToStartRir, 1000) {
+			public void onTick(long millisUntilFinished) {
+
+				// decompose difference into days, hours, minutes and seconds
+				int days = (int) ((millisUntilFinished / 1000) / 86400);
+				int hours = (int) (((millisUntilFinished / 1000) - (days * 86400)) / 3600);
+				int minutes = (int) (((millisUntilFinished / 1000) - ((days * 86400) + (hours * 3600))) / 60);
+				int seconds = (int) ((millisUntilFinished / 1000) % 60);
+
+				if (days > 0) {
+					textDayTimeCountDownTimer.setText(days + "");
+				} else {
+					textDayTimeCountDownTimer.setVisibility(View.GONE);
+					textDayCountDownTimer.setVisibility(View.GONE);
+				}
+
+				if (hours > 0) {
+					textHourTimeCountDownTimer.setText(days + "");
+				} else {
+					textHourTimeCountDownTimer.setVisibility(View.GONE);
+					textHourCountDownTimer.setVisibility(View.GONE);
+				}
+
+				if (minutes > 0) {
+					textMinuteTimeCountDownTimer.setText(days + "");
+				} else {
+					textMinuteTimeCountDownTimer.setVisibility(View.GONE);
+					textMinuteCountDownTimer.setVisibility(View.GONE);
+				}
+
+				textSecondTimeCountDownTimer.setText(seconds + "");
+
+			}
+
+			public void onFinish() {
+				viewCountDownTimer.setVisibility(View.GONE);
+			}
+		}.start();
+
+		// countDownTimer = new CountDownTimer(this.timeToStartRir, 1000) {
+		//
+		// @Override
+		// public void onTick(long leftTimeInMilliseconds) {
+		// long seconds = leftTimeInMilliseconds / 1000;
+		//
+		// if (leftTimeInMilliseconds < timeToStartRir) {
+		// // textViewShowTime.setTextAppearance(getApplicationContext(),
+		// // R.style.blinkText);
+		// // // change the style of the textview .. giving a red
+		// // // alert style
+		// //
+		// // if (blink) {
+		// // textViewShowTime.setVisibility(View.VISIBLE);
+		// // // if blink is true, textview will be visible
+		// // } else {
+		// // textViewShowTime.setVisibility(View.INVISIBLE);
+		// // }
+		// //
+		// // blink = !blink; // toggle the value of blink
+		// }
+		//
+		// Calendar cal = Calendar.getInstance();
+		// cal.setTimeInMillis(seconds * 1000);
+		//
+		// String teste = (String.format("%02d", seconds / 60) + ":" + String
+		// .format("%02d", seconds % 60));
+		//
+		// Log.d("timer teste >>> ", cal.getTime().toString());
+		//
+		// }
+		//
+		// @Override
+		// public void onFinish() {
+		// // this function will be called when the timecount is finished
+		// }
+		//
+		// }.start();
 
 	}
 }
